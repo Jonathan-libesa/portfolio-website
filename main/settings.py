@@ -84,7 +84,7 @@ DATABASES = {
     }
 }
 
-DATABASES["default"] =dj_database_url.parse("postgres://ndonga_and_son_enterprise_user:oR3LUpeV1gPMl8wOkoqdctHvcqJr3cEG@dpg-cmnulv8cmk4c738ofab0-a.oregon-postgres.render.com/ndonga_and_son_enterprise")
+DATABASES["default"] =dj_database_url.parse("postgres://ndonga_and_son_enterprise_nnh7_user:znyypeL42KoUxEDD1fnHJzzlb0tlkfWZ@dpg-cmod8bg21fec73cvp67g-a.oregon-postgres.render.com/ndonga_and_son_enterprise_nnh7")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
