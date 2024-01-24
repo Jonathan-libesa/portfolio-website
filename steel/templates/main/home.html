@@ -27,7 +27,7 @@
     </div>
         <!-- Slide 1 -->
         {% for page in pages %}
-        <div class="carousel-item {% if forloop.counter0 == 0%} active {% endif %}" style="background-image:url({{page.image_url}});" >
+        <div class="carousel-item {% if forloop.counter0 == 0%} active {% endif %}" style="background-image:url({{page.image.url}});" >
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">{{page.Title}}</h2>
