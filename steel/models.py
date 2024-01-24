@@ -7,7 +7,8 @@ from embed_video.fields import EmbedVideoField
 class Page(models.Model):
 	Title=models.CharField(max_length=350)
 	Description=models.TextField()
-	image=models.ImageField(upload_to='Ndonga_photo/',blank=False,null=False) 
+	image=models.ImageField(upload_to='Ndonga_photo/',blank=False,null=True) 
+	#image_url = models.URLField()
 	created_on=models.DateTimeField(auto_now_add=True)
 
 
