@@ -34,6 +34,9 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     'steel',
     'embed_video',
+    'Product',
+    'Services',
+    'About',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

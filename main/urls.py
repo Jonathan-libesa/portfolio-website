@@ -22,6 +22,9 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('steel.urls')),
+    path('',include('About.urls')),
+    path('',include('Services.urls')),
+    path('',include('Product.urls')),
 ]
 
 
