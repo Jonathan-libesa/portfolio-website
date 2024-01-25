@@ -4,7 +4,8 @@ from .forms import*
 from django.core.mail import EmailMessage,send_mail
 import threading
 from django.contrib import messages
-
+import requests
+from io import BytesIO
 # Create your views here.
 
 
@@ -46,38 +47,6 @@ class EmailThread(threading.Thread):
     def run(self):
         self.email.send()
 
-def send_quotation(request, door_id):
-    door = get_object_or_404(Door, pk=door_id)
-    
-    if request.method == 'POST':
-        form = QuotationForm(request.POST)
-        if form.is_valid():
-            quotation = form.save(commit=False)
-            quotation.door = door
-            quotation.save()
-
-            # Send email
-            subject = 'Quotation Request'
-            message = f"Customer Name: {quotation.customer_name}\nCustomer Email: {quotation.customer_email}\nCustomer Phone_number: {quotation.customer_Phone}\nMessage: {quotation.message}"
-
-            # Attach the door picture to the email
-            door_picture_path = quotation.door.image.path
-            with open(door_picture_path, 'rb') as picture_file:
-                door_picture_content = picture_file.read()
-
-            email = EmailMessage(subject, message, 'jonathanlibesa@gmail.com', ['jonathanlibesa@gmail.com'])
-            email.attach('door_picture.png', door_picture_content, 'image/png')
-
-            # Create an EmailThread instance and start the thread
-            email_thread = EmailThread(email)
-            email_thread.start()
-
-            messages.add_message(request, messages.SUCCESS, 'We have received your Quotation. Our team will contact you soon.')
-            return redirect('product_door')  # Redirect to a thank you page
-    else:
-        form = QuotationForm()
-    return render(request, 'product/quotation_form.html', {'form': form, 'door': door})
-
 
 
 def send_quotation1(request, window_id):
@@ -94,24 +63,27 @@ def send_quotation1(request, window_id):
             subject = 'Quotation Request'
             message = f"Customer Name: {quotation.customer_name}\nCustomer Email: {quotation.customer_email}\nCustomer Phone_number: {quotation.customer_Phone}\nMessage: {quotation.message}"
 
-            # Attach the door picture to the email
-            window_picture_path = quotation.window.image.path
-            with open(window_picture_path, 'rb') as picture_file:
-                window_picture_content = picture_file.read()
+            # Download the window picture
+            window_picture_url = quotation.window.image.url
+            response = requests.get(window_picture_url)
+            
+            if response.status_code == 200:
+                window_picture_content = response.content
 
-            email = EmailMessage(subject, message, 'jonathanlibesa@gmail.com', ['jonathanlibesa@gmail.com'])
-            email.attach('window_picture.png', window_picture_content, 'image/png')
+                # Attach the window picture to the email
+                email = EmailMessage(subject, message, 'jonathanlibesa@gmail.com', ['jonathanlibesa@gmail.com'])
+                email.attach('window_picture.png', window_picture_content, 'image/png')
 
-            # Create an EmailThread instance and start the thread
-            email_thread = EmailThread(email)
-            email_thread.start()
+                # Create an EmailThread instance and start the thread
+                email_thread = EmailThread(email)
+                email_thread.start()
 
-            messages.add_message(request, messages.SUCCESS, 'We have received your Quotation. Our team will contact you soon.')
-            return redirect('product_window')  # Redirect to a thank you page
+                messages.add_message(request, messages.SUCCESS, 'We have received your Quotation. Our team will contact you soon.')
+                return redirect('product_window')  # Redirect to a thank you page
+
     else:
         form = QuotationForm1()
     return render(request, 'product/quotation_form1.html', {'form': form, 'window': window})
-
 
 
 
@@ -130,20 +102,64 @@ def send_quotation2(request, gate_id):
             subject = 'Quotation Request'
             message = f"Customer Name: {quotation.customer_name}\nCustomer Email: {quotation.customer_email}\nCustomer Phone_number: {quotation.customer_Phone}\nMessage: {quotation.message}"
 
-            # Attach the door picture to the email
-            gate_picture_path = quotation.gate.image.path
-            with open(gate_picture_path, 'rb') as picture_file:
-                gate_picture_content = picture_file.read()
+            # Download the gate picture
+            gate_picture_url = quotation.gate.image.url
+            response = requests.get(gate_picture_url)
+            
+            if response.status_code == 200:
+                gate_picture_content = response.content
 
-            email = EmailMessage(subject, message, 'jonathanlibesa@gmail.com', ['jonathanlibesa@gmail.com'])
-            email.attach('gate_picture.png', gate_picture_content, 'image/png')
+                # Attach the gate picture to the email
+                email = EmailMessage(subject, message, 'jonathanlibesa@gmail.com', ['jonathanlibesa@gmail.com'])
+                email.attach('gate_picture.png', gate_picture_content, 'image/png')
 
-            # Create an EmailThread instance and start the thread
-            email_thread = EmailThread(email)
-            email_thread.start()
+                # Create an EmailThread instance and start the thread
+                email_thread = EmailThread(email)
+                email_thread.start()
 
-            messages.add_message(request, messages.SUCCESS, 'We have received your Quotation. Our team will contact you soon.')
-            return redirect('product_gate')  # Redirect to a thank you page
+                messages.add_message(request, messages.SUCCESS, 'We have received your Quotation. Our team will contact you soon.')
+                return redirect('product_gate')  # Redirect to a thank you page
+
     else:
         form = QuotationForm2()
+
     return render(request, 'product/quotation_form2.html', {'form': form, 'gate': gate})
+
+
+
+
+def send_quotation(request, door_id):
+    door = get_object_or_404(Door, pk=door_id)
+    
+    if request.method == 'POST':
+        form = QuotationForm(request.POST)
+        if form.is_valid():
+            quotation = form.save(commit=False)
+            quotation.door = door
+            quotation.save()
+
+            # Download the door picture
+            door_picture_url = quotation.door.image.url
+            response = requests.get(door_picture_url)
+            
+            if response.status_code == 200:
+                door_picture_content = response.content
+
+                # Send email
+                subject = 'Quotation Request'
+                message = f"Customer Name: {quotation.customer_name}\nCustomer Email: {quotation.customer_email}\nCustomer Phone_number: {quotation.customer_Phone}\nMessage: {quotation.message}"
+
+                email = EmailMessage(subject, message, 'jonathanlibesa@gmail.com', ['jonathanlibesa@gmail.com'])
+                email.attach('door_picture.png', door_picture_content, 'image/png')
+
+                # Create an EmailThread instance and start the thread
+                email_thread = EmailThread(email)
+                email_thread.start()
+
+                messages.add_message(request, messages.SUCCESS, 'We have received your Quotation. Our team will contact you soon.')
+                return redirect('product_door')  # Redirect to a thank you page
+
+    else:
+        form = QuotationForm()
+
+    return render(request, 'product/quotation_form.html', {'form': form, 'door': door})
