@@ -5,7 +5,7 @@ Contact Ndonga And Son Enterprises
 {%endblock%}
 <link href="{% static 'assets/css/home.css' %}" rel="stylesheet">
 {%block content%}
-
+{% include 'main/messages.html'%}
 <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
@@ -32,7 +32,7 @@ Contact Ndonga And Son Enterprises
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p><a href="mailto:contact@example.com">ndongaenterprises@yahoo.com</a></p>
+                <p><a href="mailto:ndongaenterprises@yahoo.com">ndongaenterprises@yahoo.com</a></p>
               </div>
 
               <div class="phone">
@@ -52,7 +52,8 @@ Contact Ndonga And Son Enterprises
 
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="" method="post"  role="form" class="php-email-form" >
+              {% csrf_token %}
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>

@@ -7,5 +7,5 @@ from steel.models import*
 def aboutpage(request):
 	
 	about=About.objects.all()
-	context={'about':about}
+	context = {'about': about} 
 	return render(request,'about/about us.html',context)

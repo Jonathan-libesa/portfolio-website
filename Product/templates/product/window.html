@@ -1,0 +1,90 @@
+{% extends 'main/index.html'%}
+{% load embed_video_tags %}
+{% load static %}
+{% block title %}
+ Our Window Products
+{% endblock %}
+
+{% block content %}
+ {% include 'main/messages.html'%}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <!-- Header Start -->
+  <div class="jumbotron jumbotron-fluid bg-jumbotron" style="margin-bottom: 0px; background: linear-gradient(rgba(33, 30, 28, 0.7), rgba(33, 40, 28, 0.7)), url({%  static 'assets/img/metal_door.jpg' %}), no-repeat center center;background-size: cover;">
+        <div class="container text-center py-5">
+            <h3 class="text-white display-3 mb-4">Our Window</h3>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-link" href="{% url 'home' %}">Home</a></p>
+                <i class="far fa-circle px-3"></i>
+                <a href="{% url 'product_gate' %}"><p class="m-0">Gate Product</p></a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</head>
+<div class="container-fluid">
+ <section id="mu-gallery">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="mu-gallery-area">
+          <!-- start title -->
+          <div class="mu-title">
+            <h2>Our Window products</h2>
+            <p>Our metal windows provide added security to your home, giving you peace of mind. Additionally, they add beauty and uniqueness to your home with countless shapes and designs.
+
+Ndonga and Son windows are of high quality, fabricated using industry-specific materials and highest quality standards. They are stronger, safer, more secure, easy to maintain, durable and fire resistant and last considerably longer.
+
+The design flexibility offered by our metal windows, together with exceptional durability and life cycle, make them an excellent choice for our customers’ projects.
+
+We offer quality metal windows for our clients using industry-specific materials. Our window products and fabrication services are of highest standard</p>
+          </div>
+          <!-- end title -->
+          <!-- start gallery content -->
+          <div class="mu-gallery-content">
+            <!-- Start gallery menu -->
+            <div class="mu-gallery-top">              
+              <ul>
+                <li class="filter active" data-filter="all">All</li>
+                <li class="filter" data-filter=".lab">Houses</li>
+                <li class="filter" data-filter=".classroom">Class Room</li>
+                <li class="filter" data-filter=".library">Library</li>
+                <li class="filter" data-filter=".cafe">Mansions</li>
+                <li class="filter" data-filter=".others">Others</li>
+              </ul>
+            </div>
+            <!-- End gallery menu -->
+             <div class="mu-gallery-body">
+              <ul id="mixit-container" class="row">
+                {% for window in about %}
+                <!-- start single gallery image -->
+               <li class="col-md-4 col-sm-6 col-xs-12 mix library">
+                  <div class="mu-single-gallery">                  
+                    <div class="mu-single-gallery-item">
+                      <div class="mu-single-gallery-img">
+                        <a href="#"><img alt="img" src="{{ window.image.url }}"></a>
+                      </div>
+                       <div class="mu-single-gallery-info">
+                        <div class="mu-single-gallery-info-inner">
+                          <h4>Ndonga and Sons Doors</h4>
+                          <p>the best</p>
+                          <a href="{{ window.image.url }}" data-fancybox-group="gallery" class="fancybox"><span class="fa fa-eye"></span></a>
+                          <a href="{% url 'send_quotation1' window.id %}" class="aa-link"><span class="fa fa-link"></span></a>
+                        </div>
+                      </div> 
+                    </div>
+                  </div>
+               </li>
+               {% endfor %}
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- End gallery  -->
+ 
+  
+</div>
+{% endblock %}

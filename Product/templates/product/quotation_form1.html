@@ -1,0 +1,30 @@
+{% extends 'main/index.html'%}
+{% load embed_video_tags %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+ Request For Quoation
+{% endblock %}
+{% block content %}
+<title>Edit Club Information</title>
+
+
+    <br>
+    <div class="container">
+    <!-- Content here -->
+        <div class="card p-3" id="card">
+            <div class="card-titler">
+                <h3 style="text-align:center;">GET QUOTATION OF THE PRODUCT</h3>
+            </div>
+                <form method="post" action="{% url 'send_quotation1' window.id %}">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                  <div class="mb-5 text-center"> <!-- Adjusted margin and centered text -->
+    				<button type="submit" id="submit" class="btn btn-primary btn-lg">Submit Your Quotation</button>
+				 </div>
+                <form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

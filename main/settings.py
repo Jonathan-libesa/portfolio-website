@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'Product',
     'Services',
     'About',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -87,7 +88,7 @@ DATABASES = {
     }
 }
 
-DATABASES["default"] =dj_database_url.parse("postgres://ndonga_and_son_enterprise_nnh7_user:znyypeL42KoUxEDD1fnHJzzlb0tlkfWZ@dpg-cmod8bg21fec73cvp67g-a.oregon-postgres.render.com/ndonga_and_son_enterprise_nnh7")
+DATABASES["default"] =dj_database_url.parse("postgres://ndonga_and_son_enterprise_mevl_user:MijCNE7s6G5YP2I8WPNIVU2yv32ceG7m@dpg-cmpahp6ct0pc73f1ka20-a.oregon-postgres.render.com/ndonga_and_son_enterprise_mevl")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -136,3 +137,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'MEDIA/Main')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'  # Choose the template pack that suits your project
+
+# EMAIL CONFIG
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FROM_USER = 'EMAIL_FROM_USER'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER ='jonathanlibesa@gmail.com'
+EMAIL_HOST_PASSWORD = 'ibsodmfcinbftayp'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587

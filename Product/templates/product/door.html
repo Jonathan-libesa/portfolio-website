@@ -1,0 +1,65 @@
+
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<div class="container-fluid">
+ <section id="mu-gallery">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="mu-gallery-area">
+          <!-- start title -->
+          <div class="mu-title">
+            <h2>Our door products</h2>
+            <p>Are you looking for the best metal doors in Kenya? We got you covered. We offer different types of highest quality doors at affordable prices.
+
+We make the best metal doors that will satisfy your needs and add a unique attractive experience to your home. We also have a selection of ideas for you to get started if you do not have any in mind already. We ensure your complete satisfaction.
+
+Our doors are of high quality materials and superior workmanship. They are all metal and no plastics for ultimate strength. We take extra effort to design our doors, ensuring they carry the right look and feel each and every time</p>
+          </div>
+          <!-- end title -->
+          <!-- start gallery content -->
+          <div class="mu-gallery-content">
+            <!-- Start gallery menu -->
+            <div class="mu-gallery-top">              
+              <ul>
+                <li class="filter active" data-filter="all">All</li>
+                <li class="filter" data-filter=".lab">Houses</li>
+                <li class="filter" data-filter=".classroom">Class Room</li>
+                <li class="filter" data-filter=".library">Library</li>
+                <li class="filter" data-filter=".cafe">Mansions</li>
+                <li class="filter" data-filter=".others">Others</li>
+              </ul>
+            </div>
+            <!-- End gallery menu -->
+             <div class="mu-gallery-body">
+              <ul id="mixit-container" class="row">
+                {% for door in about %}
+                <!-- start single gallery image -->
+               <li class="col-md-4 col-sm-6 col-xs-12 mix library">
+                  <div class="mu-single-gallery">                  
+                    <div class="mu-single-gallery-item">
+                      <div class="mu-single-gallery-img">
+                        <a href="#"><img alt="img" src="{{ door.image.url }}"></a>
+                      </div>
+                       <div class="mu-single-gallery-info">
+                        <div class="mu-single-gallery-info-inner">
+                          <h4>Ndonga and Sons Doors</h4>
+                          <p>the best</p>
+                          <a href="{{ door.image.url }}" data-fancybox-group="gallery" class="fancybox"><span class="fa fa-eye"></span></a>
+                          <a href="{% url 'send_quotation' door.id %}" class="aa-link"><span class="fa fa-link"></span></a>
+                        </div>
+                      </div> 
+                    </div>
+                  </div>
+               </li>
+               {% endfor %}
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- End gallery  -->
+ 
+  
+</div>
